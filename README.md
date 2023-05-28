@@ -1,7 +1,8 @@
 # learn-shell
 
 TOPIC OF SHELL SCRIPTING
- comments
+
+comments
  printing
  variables
  fuctions
