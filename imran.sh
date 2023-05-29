@@ -3,3 +3,6 @@ echo Hello world
  pwd
 
  yum list installed | grep vim
+
+ yum list
+ 
