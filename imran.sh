@@ -4,5 +4,5 @@ echo Hello world
 
  yum list installed | grep vim
 
- yum list
- 
+ yu
+ m list
