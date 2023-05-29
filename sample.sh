@@ -1,4 +1,5 @@
-ls -ltr
+ls -l
+
 
 pwd
 
