@@ -1,2 +1,1 @@
-ls-ltr
-pwd
+
