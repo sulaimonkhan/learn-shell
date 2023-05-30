@@ -9,6 +9,8 @@ unzip /tmp/frontend.zip
 
 ## we need to copy config file
 
+
 systemctl enable nginx
 systemctl restart nginx 
+
 
