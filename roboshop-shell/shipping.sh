@@ -26,6 +26,9 @@ yum install mysql -y &>>/tmp/roboshop.log
 echo -e "\e[33m Load schema\e[0m"
 mysql -h <MYSQL-SERVER-IPADDRESS> -uroot -pRoboShop@1 < /app/schema/shipping.sql   &>>/tmp/roboshop.log
 
+echo -e "\e[33m Setup SystemD File \e[0m"
+cp /root/learn-shell/roboshop-shell/shipping.service /etc/systemd/system/shipping.service &>>/tmp/roboshop.log 
+
 echo -e "\e[33m Start Shipping service\e[0m"
 systemctl daemon-reload &>>/tmp/roboshop.log
 systemctl enable shipping &>>/tmp/roboshop.log
