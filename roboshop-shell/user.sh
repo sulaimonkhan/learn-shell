@@ -28,7 +28,7 @@ cp user.s/root/learn-shell/roboshop-shell/user.service /etc/systemd/system/user.
 echo -e "\e[33m Start User Service\e[0m"
 systemctl daemon-reload &>>/tmp/roboshop.log
 systemctl enable user   &>>/tmp/roboshop.log
-systemctl restart user  &>>/tmp/roboshop.log
+systemctl restart user  &>>/tmp/roboshop.log 
 
 echo -e "\e[33m Copy MongoDB Repo file \e[0m"
 cp /root/learn-shell/roboshop-shell/mongodb.repo /etc/yum.repos.d/mongodb.repo &>>/tmp/roboshop.log
