@@ -21,6 +21,11 @@ go mod init dispatch &>>/tmp/roboshop.log
 go get  &>>/tmp/roboshop.log
 go build &>>/tmp/roboshop.log
 
+echo -e \e"[33m Setup SystemD Service \e[0m"
+cp /root/learn-shell/roboshop-shell/Dispatch.service /etc/systemd/system/dispatch.service  &>>/tmp/roboshop.log
+
+
+
 
 echo -e \e"[33m Start Dispatch Service \e[0m"
 systemctl daemon-reload   &>>/tmp/roboshop.log
