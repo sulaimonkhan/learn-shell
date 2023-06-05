@@ -1,3 +1,5 @@
+component=catalogue
+
 echo -e "\e[33mConfiguring Nodejs Repos\e[0m"
 curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>/tmp/roboshop.log
 
@@ -13,24 +15,24 @@ rm -rf /app  &>>/tmp/roboshop.log
 mkdir /app
 
 echo -e "\e[33m Download Application Content\e[0m"
-curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue.zip  &>>/tmp/roboshop.log
+curl -o /tmp/$component.zip https://roboshop-artifacts.s3.amazonaws.com/$component.zip  &>>/tmp/roboshop.log
 cd /app
 
 
 echo -e "\e[33m Extract Application Content\e[0m"
-unzip /tmp/catalogue.zip  &>>/tmp/roboshop.log
+unzip /tmp/$component.zip  &>>/tmp/roboshop.log
 cd /app
 
 echo -e "\e[33m Install Nodejs Dependencies\e[0m"
 npm install  &>>/tmp/roboshop.log
 
 echo -e "\e[33m Setup systemD Service\e[0m"
-cp /root/learn-shell/roboshop-shell/catalogue.service /etc/systemd/system/catalogue.service  &>>/tmp/roboshop.log
+cp /root/learn-shell/roboshop-shell/$component.service /etc/systemd/system/$component.service  &>>/tmp/roboshop.log
 
-echo -e "\e[33m Start Catalogue Service\e[0m"
+echo -e "\e[33m Start $component Service\e[0m"
 systemctl daemon-reload  &>>/tmp/roboshop.log
-systemctl enable catalogue  &>>/tmp/roboshop.log
-systemctl restart catalogue  &>>/tmp/roboshop.log
+systemctl enable $component  &>>/tmp/roboshop.log
+systemctl restart $component  &>>/tmp/roboshop.log
 
 echo -e "\e[33m Copy MongoDB Repo file\e[0m"
 cp /root/learn-shell/roboshop-shell/mongodb.repo /etc/yum.repos.d/mongodb.repo  &>>/tmp/roboshop.log
@@ -39,4 +41,4 @@ echo -e "\e[33m Install MongoDB Client\e[0m"
 yum install mongodb-org-shell -y  &>>/tmp/roboshop.log
 
 echo -e "\e[33m Load Schema\e[0m"
-mongo --host mongodb-dev.devopsb72.site </app/schema/catalogue.js &>>/tmp/roboshop.log
+mongo --host mongodb-dev.devopsb72.site </app/schema/$component.js &>>/tmp/roboshop.log
