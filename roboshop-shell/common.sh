@@ -36,5 +36,3 @@ app_path="/app"
    systemctl daemon-reload  &>>$log_file
    systemctl enable $component  &>>$log_file
    systemctl restart $component  &>>$log_file
-
-
