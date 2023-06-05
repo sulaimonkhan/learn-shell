@@ -1,5 +1,5 @@
 source common.sh 
-component=catalogue
+component=catalogue 
 
 
 echo -e "${color} Configuring Nodejs Repos ${nocolor}"
