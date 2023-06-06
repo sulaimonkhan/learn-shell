@@ -1,5 +1,5 @@
 source common.sh
-component=cart
+component=${component} 
 
 echo -e "${color} Configuring NodeJS Repos ${nocolor}"
 curl -sL https://rpm.nodesource.com/setup_lts.x | bash  &>>${log_file}
@@ -7,7 +7,7 @@ curl -sL https://rpm.nodesource.com/setup_lts.x | bash  &>>${log_file}
 echo -e  "${color} Install NodeJS ${nocolor}"
 yum install nodejs -y   &>>${log_file}
 
-echo -e  "${color} Add Application ${componenet} ${nocolor}"
+echo -e  "${color} Add Application User ${nocolor}"
 useradd roboshop  &>>${log_file}
 
 echo -e  "${color} Create Application Directory ${nocolor}"
@@ -27,7 +27,6 @@ npm install  &>>${log_file}
 
 echo -e "${color} Setup Systemd Service ${nocolor}"
 cp /root/learn-shell/roboshop-shell/${componenet}.service /etc/systemd/system/${componenet}.service   &>>${log_file}
-
 
 echo -e "${color} Start ${componenet} Service ${nocolor}"
 systemctl daemon-reload   &>>${log_file}
