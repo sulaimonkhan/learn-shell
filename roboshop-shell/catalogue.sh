@@ -1,13 +1,24 @@
-source common.sh 
-component=catalogue 
+curl -sL https://rpm.nodesource.com/setup_lts.x | bash
 
-nodejs
+yum install nodejs -y
 
-echo -e "${color} Copy MongoDB Repo file ${nocolor}"
-cp /root/learn-shell/roboshop-shell/mongodb.repo /etc/yum.repos.d/mongodb.repo  &>>$log_file
+useradd roboshop
+mkdir /app 
 
-echo -e "${color} Install MongoDB Client ${nocolor}"
-yum install mongodb-org-shell -y  &>>$log_file
+curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue.zip 
+cd /app 
 
-echo -e "${color} Load Schema ${nocolor}"
-mongo --host mongodb-dev.devopsb72.site <${app_path}/schema/$component.js &>>$log_file
+unzip /tmp/catalogue.zip
+cd /app
+
+npm install
+
+cp catalogue.service /etc/systemd/system/catalogue.service
+
+systemctl daemon-reload
+systemctl enable cart 
+systemctl restart cart
+
+cp mongodb.repo /etc/yum.repos.d/mongo.repo 
+
+mongo --host mongodb-dev.devopsb72.site </app/schema/catalogue.js
