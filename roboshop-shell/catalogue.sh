@@ -1,41 +1,41 @@
 
 echo -e "\e[33m Configuring NodeJS Repos \e[0m"
-curl -sL https://rpm.nodesource.com/setup_lts.x | bash  
+curl -sL https://rpm.nodesource.com/setup_lts.x | bash  &>>/tmp/roboshop.log 
 
 echo -e  "\e[33m Install NodeJS \e[0m"
-yum install nodejs -y
+yum install nodejs -y  &>>/tmp/roboshop.log 
 
 echo -e  "\e[33m Add Application User \e[0m"
-useradd roboshop 
+useradd roboshop &>>/tmp/roboshop.log 
 
 echo -e  "\e[33m Create Application Directory\e[0m"
-rm -rf /app   
+rm -rf /app   &>>/tmp/roboshop.log 
 mkdir /app 
 
 echo -e  "\e[33m Download Application Content \e[0m"
-curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue.zip 
+curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue.zip &>>/tmp/roboshop.log 
 cd /app
 
 echo -e  "\e[33m Extract Application Content \e[0m"
-unzip /tmp/catalogue.zip  
+unzip /tmp/catalogue.zip  &>>/tmp/roboshop.log 
 cd /app
 
 echo -e "\e[33m Install NodeJS Dependencies \e[0m"
-npm install  
+npm install  &>>/tmp/roboshop.log 
 
 echo -e  "\e[33m Setup SystemD Service \e[0m"
-cp /root/learn-shell/roboshop-shell/catalogue.service /etc/systemd/system/catalogue.service 
+cp /root/learn-shell/roboshop-shell/catalogue.service /etc/systemd/system/catalogue.service &>>/tmp/roboshop.log 
 
 echo -e  "\e[33m Start catalogue Service \e[0m"
-systemctl daemon-reload  
-systemctl enable cart 
-systemctl restart cart  
+systemctl daemon-reload  &>>/tmp/roboshop.log 
+systemctl enable catalogue &>>/tmp/roboshop.log 
+systemctl restart catalogue  &>>/tmp/roboshop.log 
 
 echo -e  "\e[33m Copy MongoDB Repo file \e[0m"
-cp /root/learn-shell/roboshop-shell/ mongodb.repo /etc/yum.repos.d/mongo.repo 
+cp /root/learn-shell/roboshop-shell/ mongodb.repo /etc/yum.repos.d/mongo.repo &>>/tmp/roboshop.log 
 
 echo -e  "\e[33m Install MOngoDB Client \e[0m"
-yum install mongodb-org-shell -y  
+yum install mongodb-org-shell -y  &>>/tmp/roboshop.log 
 
 echo -e  "\e[33m Load Schema \e[0m"
-mongo --host mongodb-dev.devopsb72.site </app/schema/catalogue.js  
+mongo --host mongodb-dev.devopsb72.site </app/schema/catalogue.js  &>>/tmp/roboshop.log 
