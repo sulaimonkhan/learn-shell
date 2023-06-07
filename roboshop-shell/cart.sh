@@ -2,7 +2,7 @@ source common.sh
 component=${component} 
 
 echo -e "${color} Configuring NodeJS Repos ${nocolor}"
-curl -sL https://rpm.nodesource.com/setup_lts.x | bash  &>>${log_file}
+curl -sL https://rpm.nodesource.com/setup_lts.x | bash  &>>/tmp/roboshop.log
 
 echo -e  "${color} Install NodeJS ${nocolor}"
 yum install nodejs -y   &>>${log_file}

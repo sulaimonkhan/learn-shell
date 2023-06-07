@@ -1,43 +1,41 @@
-source common.sh
-component=catalogue
 
-echo -e "${color} Configuring NodeJS Repos ${nocolor}"
-curl -sL https://rpm.nodesource.com/setup_lts.x | bash  &>>$log_file
+echo -e "\e[33m Configuring NodeJS Repos \e[0m"
+curl -sL https://rpm.nodesource.com/setup_lts.x | bash  
 
-echo -e "${color} Install NodeJS ${nocolor}"
-yum install nodejs -y &>>$log_file
+echo -e  "\e[33m Install NodeJS \e[0m"
+yum install nodejs -y
 
-echo -e "${color} Add Application User ${nocolor}"
-useradd roboshop &>>$log_file
+echo -e  "\e[33m Add Application User \e[0m"
+useradd roboshop 
 
-echo -e "${color} Create Application Directory ${nocolor}"
-rm -rf ${app_path}  &>>$log_file
-mkdir ${app_path} 
+echo -e  "\e[33m Create Application Directory\e[0m"
+rm -rf /app   
+mkdir /app 
 
-echo -e "${color} Download Application Content ${nocolor}"
-curl -o /tmp/$component.zip https://roboshop-artifacts.s3.amazonaws.com/$component.zip &>>$log_file
-cd ${app_path}
+echo -e  "\e[33m Download Application Content \e[0m"
+curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue.zip 
+cd /app
 
-echo -e "${color} Extract Application Content ${nocolor}"
-unzip /tmp/catalogue.zip &>>$log_file
-cd ${app_path}
+echo -e  "\e[33m Extract Application Content \e[0m"
+unzip /tmp/catalogue.zip  
+cd /app
 
-echo -e "${color} Install NodeJS Dependencies ${nocolor}"
-npm install &>>$log_file
+echo -e "\e[33m Install NodeJS Dependencies \e[0m"
+npm install  
 
-echo -e "${color} Setup SystemD Service ${nocolor}"
-cp /root/learn-shell/roboshop-shell/$component.service /etc/systemd/system/$component.service &>>/tmp/roboshop.log &>>$log_file
+echo -e  "\e[33m Setup SystemD Service \e[0m"
+cp /root/learn-shell/roboshop-shell/catalogue.service /etc/systemd/system/catalogue.service 
 
-echo -e "${color} Start $component Service ${nocolor}"
-systemctl daemon-reload &>>$log_file
-systemctl enable cart &>>$log_file
-systemctl restart cart &>>$log_file
+echo -e  "\e[33m Start catalogue Service \e[0m"
+systemctl daemon-reload  
+systemctl enable cart 
+systemctl restart cart  
 
-echo -e "${color} Copy MongoDB Repo file ${nocolor}"
-cp /root/learn-shell/roboshop-shell/ mongodb.repo /etc/yum.repos.d/mongo.repo &>>$log_file 
+echo -e  "\e[33m Copy MongoDB Repo file \e[0m"
+cp /root/learn-shell/roboshop-shell/ mongodb.repo /etc/yum.repos.d/mongo.repo 
 
-echo -e "${color} Install MOngoDB Client ${nocolor}"
-yum install mongodb-org-shell -y &>>$log_file
+echo -e  "\e[33m Install MOngoDB Client \e[0m"
+yum install mongodb-org-shell -y  
 
-echo -e "${color} Load Schema ${nocolor}"
-mongo --host mongodb-dev.devopsb72.site </app/schema/$component.js &>>$log_file
+echo -e  "\e[33m Load Schema \e[0m"
+mongo --host mongodb-dev.devopsb72.site </app/schema/catalogue.js  
