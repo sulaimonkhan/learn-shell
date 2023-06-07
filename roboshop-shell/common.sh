@@ -2,37 +2,75 @@ color="\e[35m"
 nocolor="\e[0m"
 log_file="/tmp/robosop.log"
 app_path="/app"
+app_presetup() {
+  echo -e "${color} Add Application User ${nocolor}"
+  useradd roboshop   &>>$log_file
 
-nodejs() {
-   echo -e "${color} Configuring NodeJS Repos ${nocolor}"
-curl -sL https://rpm.nodesource.com/setup_lts.x | bash  &>>$log_file
+  echo -e "${color} Create Application Directory ${nocolor}"
+  rm -rf /app &>>$log_file
+  mkdir /app 
 
-echo -e "${color} Install NodeJS  ${nocolor}"
-yum install nodejs -y   &>>$log_file
+  echo -e "${color} Download Application Content ${nocolor}"
+  curl -L -o /tmp/${component}.zip https://roboshop-artifacts.s3.amazonaws.com/${component}.zip &>>$log_file 
 
-echo -e "${color} Add Application User ${nocolor}"
-useradd roboshop   &>>$log_file
+  echo -e "${color} Extract Application Content ${nocolor}"
+  cd ${app_path}
+  unzip /tmp/$component.zip  &>>$log_file
+} 
 
-echo -e "${color} Create Application Directory ${nocolor}"
-rm -rf ${app_path}  &>>$log_file
-mkdir ${app_path} 
+ systemd_setup() {
+  echo -e "${color} Setup SystemD Service ${nocolor}"
+  cp /root/learn-shell/roboshop-shell /$component.service /etc/systemd/system/$component.service  &>>$log_file
 
-echo -e "${color} Download Application Content ${nocolor}"
-curl -o /tmp/$component.zip https://roboshop-artifacts.s3.amazonaws.com/$component.zip   &>>$log_file
-cd ${app_path} 
+  echo -e "${color} Start $component service ${nocolor}"
+  systemctl daemon-reload   &>>$log_file
+  systemctl enable $component  &>>$log_file
+  systemctl restart $component  &>>$log_file
+} 
 
-echo -e "${color} Extract Application Content ${nocolor}"
-unzip /tmp/$component.zip  &>>$log_file
-cd ${app_path} 
+ nodejs() {
+  echo -e "${color} Configuring NodeJS Repos ${nocolor}"
+  curl -sL https://rpm.nodesource.com/setup_lts.x | bash  &>>$log_file
 
-echo -e "${color} Install Nodejs Dependencies ${nocolor}"
-npm install   &>>$log_file
+  echo -e "${color} Install NodeJS  ${nocolor}"
+  yum install nodejs -y   &>>$log_file
 
-echo -e "${color} Setup SystemD Service ${nocolor}"
-cp /root/learn-shell/roboshop-shell /$component.service /etc/systemd/system/$component.service  &>>$log_file
+  app_presetup 
 
-echo -e "${color} Start $component service ${nocolor}"
-systemctl daemon-reload   &>>$log_file
-systemctl enable $component  &>>$log_file
-systemctl restart $component  &>>$log_file  
+  echo -e "${color} Install Nodejs Dependencies ${nocolor}"
+  npm install   &>>$log_file
+
+  systemd_setup  
+ }
+
+  mongo_schema_setup() {
+   echo -e "${color} Copy MongoDB Repo file ${nocolor}"
+   cp /root/learn-shell/roboshop-shell/mongodb.repo /etc/yum.repos.d/mongo.repo   &>>$log_file
+
+  echo -e "${color} Install MongoDB Client ${nocolor}" 
+  yum install mongodb-org-shell -y  &>>$log_file
+
+  echo -e "${color} Load Schema ${nocolor}"
+  mongo --host mongodb-dev.devopsb72.site <${app_path}/schema/$component.js  &>>$log_file   
+}
+ mysql_schema_setup(){
+   echo -e "${color} Install MySQL Client ${nocolor}"
+   yum install mysql -y &>>$log_file
+
+   echo -e "${color} Load schema\e[0m"
+   mysql -h mysql-dev.devopsb72.site -uroot -pRoboShop@1 < /app/schema/${component}.sql  &>>$log_file
+ }  
+
+ maven () {
+  echo -e "${color} Install Maven ${nocolor}"
+  yum install maven -y &>>$log_file
+
+  app_presetup 
+
+  echo -e "${color} Download Maven Dependencies ${nocolor}"
+  mvn clean package &>>$log_file
+  mv target/${component}-1.0.jar ${component}.jar &>>$log_file
+
+  mysql_schema_setup
+  systemd_setup
 }
