@@ -1,5 +1,4 @@
-source common.sh
-componenet=catalogue
+
 
 echo -e "${color} Configuring NodeJS Repos ${nocolor}"
 curl -sL https://rpm.nodesource.com/setup_lts.x | bash  &>>$log_file 
