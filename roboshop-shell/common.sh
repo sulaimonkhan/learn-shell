@@ -81,15 +81,13 @@ app_presetup() {
 
   app_presetup
   
-  echo -e "${color} Extract Application Content ${nocolor}
-  unzip /tmp/payment.zip  &>>/tmp/rpboshop.log
-
   echo -e "${color} Install Application Dependencies ${nocolor}
   cd /app 
   pip3.6 install -r requirements.txt &>>/tmp/rpboshop.log
 
   systemd_setup 
-}  
+}
+
 
 
 
