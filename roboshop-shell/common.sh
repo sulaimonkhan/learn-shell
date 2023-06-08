@@ -26,7 +26,7 @@
 
  systemd_setup() {
    echo -e "${color} Setup SystemD Service ${nocolor}"
-   cp /root/learn-shell/roboshop-shell /$component.service /etc/systemd/system/$component.service  &>>$log_file
+   cp /root/learn-shell/roboshop-shell/$component.service /etc/systemd/system/$component.service  &>>$log_file
    echo $?
 
    echo -e "${color} Start $component service ${nocolor}"
