@@ -24,18 +24,17 @@
   echo $?
 } 
 
-
  systemd_setup() {
-  echo -e "${color} Setup SystemD Service ${nocolor}"
-  cp /root/learn-shell/roboshop-shell /$component.service /etc/systemd/system/$component.service  &>>$log_file
-  echo $?
+   echo -e "${color} Setup SystemD Service ${nocolor}"
+   cp /root/learn-shell/roboshop-shell /$component.service /etc/systemd/system/$component.service  &>>$log_file
+   echo $?
 
-  echo -e "${color} Start $component service ${nocolor}"
-  systemctl daemon-reload   &>>$log_file
-  systemctl enable $component  &>>$log_file
-  systemctl restart $component  &>>$log_file
-  echo $?
-} 
+   echo -e "${color} Start $component service ${nocolor}"
+   systemctl daemon-reload   &>>$log_file
+   systemctl enable $component  &>>$log_file
+   systemctl restart $component  &>>$log_file
+   echo $?
+}
 
  nodejs() {
   echo -e "${color} Configuring NodeJS Repos ${nocolor}"
@@ -95,7 +94,7 @@
   cd /app 
   pip3.6 install -r requirements.txt &>>/tmp/rpboshop.log
   echo $?
-  
+
   systemd_setup 
 }
 
