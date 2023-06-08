@@ -1,31 +1,40 @@
-color="\e[35m"
-nocolor="\e[0m"
-log_file="/tmp/robosop.log"
-app_path="/app"
-app_presetup() {
+ color="\e[35m"
+ nocolor="\e[0m"
+ log_file="/tmp/robosop.log"
+ app_path="/app"
+
+
+ app_presetup() { 
   echo -e "${color} Add Application User ${nocolor}"
   useradd roboshop   &>>$log_file
+  echo $?
 
   echo -e "${color} Create Application Directory ${nocolor}"
   rm -rf /app &>>$log_file
   mkdir /app 
+  echo $?
 
   echo -e "${color} Download Application Content ${nocolor}"
   curl -L -o /tmp/${component}.zip https://roboshop-artifacts.s3.amazonaws.com/${component}.zip &>>$log_file 
+  echo $?
 
   echo -e "${color} Extract Application Content ${nocolor}"
   cd ${app_path}
   unzip /tmp/$component.zip  &>>$log_file
+  echo $?
 } 
+
 
  systemd_setup() {
   echo -e "${color} Setup SystemD Service ${nocolor}"
   cp /root/learn-shell/roboshop-shell /$component.service /etc/systemd/system/$component.service  &>>$log_file
+  echo $?
 
   echo -e "${color} Start $component service ${nocolor}"
   systemctl daemon-reload   &>>$log_file
   systemctl enable $component  &>>$log_file
   systemctl restart $component  &>>$log_file
+  echo $?
 } 
 
  nodejs() {
@@ -78,6 +87,7 @@ app_presetup() {
  python () {
   echo -e "${color} Install python ${nocolor}"
   yum install python36 gcc python3-devel -y  &>>/tmp/rpboshop.log
+  echo $?
 
   app_presetup
   
