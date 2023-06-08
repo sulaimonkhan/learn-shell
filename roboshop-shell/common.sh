@@ -76,12 +76,12 @@ app_presetup() {
 }
 
  python () {
-  echo -e "${color} Install python ${nocolor}
+  echo -e "${color} Install python ${nocolor}"
   yum install python36 gcc python3-devel -y  &>>/tmp/rpboshop.log
 
   app_presetup
   
-  echo -e "${color} Install Application Dependencies ${nocolor}
+  echo -e "${color} Install Application Dependencies ${nocolor}"
   cd /app 
   pip3.6 install -r requirements.txt &>>/tmp/rpboshop.log
 
