@@ -59,7 +59,7 @@ app_presetup() {
 
    echo -e "${color} Load schema ${nocolor}"
    mysql -h mysql-dev.devopsb72.site -uroot -pRoboShop@1 < /app/schema/${component}.sql  &>>$log_file
- }  
+}     
 
  maven () {
   echo -e "${color} Install Maven ${nocolor}"
@@ -74,3 +74,24 @@ app_presetup() {
   mysql_schema_setup
   systemd_setup
 }
+
+ python () {
+  echo -e "${color} Install python ${nocolor}
+  yum install python36 gcc python3-devel -y  &>>/tmp/rpboshop.log
+
+  app_presetup
+  
+  echo -e "${color} Extract Application Content ${nocolor}
+  unzip /tmp/payment.zip  &>>/tmp/rpboshop.log
+
+  echo -e "${color} Install Application Dependencies ${nocolor}
+  cd /app 
+  pip3.6 install -r requirements.txt &>>/tmp/rpboshop.log
+
+  systemd_setup 
+}  
+
+
+
+
+ 
