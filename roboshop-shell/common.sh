@@ -57,7 +57,7 @@ app_presetup() {
    echo -e "${color} Install MySQL Client ${nocolor}"
    yum install mysql -y &>>$log_file
 
-   echo -e "${color} Load schema\e[0m"
+   echo -e "${color} Load schema ${nocolor}"
    mysql -h mysql-dev.devopsb72.site -uroot -pRoboShop@1 < /app/schema/${component}.sql  &>>$log_file
  }  
 
