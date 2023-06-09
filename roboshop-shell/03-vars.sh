@@ -11,4 +11,4 @@ echo value of a is ${a}dollares
 echo Scrpit Name - $0
 echo First Argument - $1
 echo All Arguments - $*
-echo No of Arguments -$#
+echo No of Arguments - $#
