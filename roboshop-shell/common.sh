@@ -37,8 +37,13 @@ if [ $? -eq 0 ]; then
  systemd_setup() {
    echo -e "${color} Setup SystemD Service ${nocolor}"
    cp /root/learn-shell/roboshop-shell/$component.service /etc/systemd/system/$component.service  &>>$log_file
-   sed -i -e "s/roboshop_app_password/$1/" /root/learn-shell/roboshop-shell/$component.service
-   stat_check $?
+   sed -i -e "s/roboshop_app_password/$roboshop_app_password/" /etc/systemd/system/$component.service 
+   
+    if [ $? -eq 0 ]; then
+      echo SUCCESS
+    else
+       echo FAILURE
+    fi     
 
    echo -e "${color} Start $component service ${nocolor}"
    systemctl daemon-reload   &>>$log_file
