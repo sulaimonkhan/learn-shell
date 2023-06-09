@@ -110,6 +110,7 @@ if [ $? -eq 0 ]; then
   pip3.6 install -r requirements.txt &>>/tmp/rpboshop.log
   stat_check $?
 
+  sed -i -e "s/roboshop_app_password/$1/" /root/learn-shell/roboshop-shell/$component.service
   systemd_setup 
 }
 
