@@ -6,7 +6,6 @@ echo value of a is $a dollars
 echo value of a is ${a}dollares
 
 
-
 # special variable for inputs
 # special variable used for inputs are $0 to $n, $* , $#
 echo $0
