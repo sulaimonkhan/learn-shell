@@ -37,7 +37,7 @@ if [ $? -eq 0 ]; then
  systemd_setup() {
    echo -e "${color} Setup SystemD Service ${nocolor}"
    cp /root/learn-shell/roboshop-shell/$component.service /etc/systemd/system/$component.service  &>>$log_file
-   istat_check $?
+   stat_check $?
 
    echo -e "${color} Start $component service ${nocolor}"
    systemctl daemon-reload   &>>$log_file
