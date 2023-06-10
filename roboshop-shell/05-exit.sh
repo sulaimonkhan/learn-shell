@@ -1,4 +1,4 @@
 
 echo Hello
-exit 1000
+exit 100
 echo bye
