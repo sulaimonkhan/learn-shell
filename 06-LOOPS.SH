@@ -4,3 +4,8 @@ while [ $a -gt 0  ];do
   a=$(($a-1))
   sleep 1
 done
+
+for component in catalogue user cart fronted shipping payment ; do
+  echo creating component - $component
+  sleep 1
+  done
