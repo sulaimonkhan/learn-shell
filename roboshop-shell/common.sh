@@ -2,13 +2,20 @@
  nocolor="\e[0m"
  log_file="/tmp/robosop.log"
  app_path="/app"
+ user_id=$(id -u)
+ if [ $user_id -ne 0 ]; then
+    echo scrpit should be running with sudo
+    exit 1
+  fi  
 
 stat_check() {
-if [ $? -eq 0 ]; then
+ if [ $? -eq 0 ]; then
     echo SUCCESS
   else
     echo FAILURE 
-  fi
+    exit 1
+  fi  
+
 }
 
  app_presetup() { 
@@ -43,7 +50,8 @@ if [ $? -eq 0 ]; then
       echo SUCCESS
     else
        echo FAILURE
-    fi     
+    fi
+
 
    echo -e "${color} Start $component service ${nocolor}"
    systemctl daemon-reload   &>>$log_file
