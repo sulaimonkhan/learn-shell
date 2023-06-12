@@ -96,7 +96,7 @@ stat_check() {
 
 
    echo -e "${color} Load schema ${nocolor}"
-   mysql -h mysql-dev.devopsb72.site -uroot -pRoboshop@1 </app/schema/${component}  &>>$log_file
+   mysql -h mysql-dev.devopsb72.site -uroot -pRoboshop@1 </app/schema/${component}.sql  &>>$log_file
    stat_check $?
 }
    
