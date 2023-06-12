@@ -8,4 +8,4 @@ done
 for component in catalogue user cart fronted shipping payment ; do
   echo creating component - $component
   sleep 1
-  done
+done
