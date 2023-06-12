@@ -89,7 +89,7 @@ stat_check() {
 }
 
 
- mysql_schema_setup(){
+ mysql_schema_setup() {
    echo -e "${color} Install MySQL Client ${nocolor}"
    yum install mysql -y &>>$log_file
    stat_check $?
