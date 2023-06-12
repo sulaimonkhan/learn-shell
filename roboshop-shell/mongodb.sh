@@ -1,7 +1,7 @@
 source common.sh
 
 echo -e "${color} Copy MongoDB Repo file ${nocolor}"
-cp /root/learn-shell/roboshop-shell/mongodb.repo /etc/yum.repos.d/mongodb.repo &>>/tmp/roboshop.log 
+cp /home/centos/learn-shell/roboshop-shell/mongodb.repo /etc/yum.repos.d/mongodb.repo &>>/tmp/roboshop.log 
 stat_check $?
 
 echo -e "${color}Installing MongoDB Server ${nocolor}"
