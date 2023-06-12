@@ -1,15 +1,21 @@
-echo -e "\e[33mDisable MySQL Default version \e[0m"
+source common.sh
+
+echo -e "${color}Disable MySQL Default version  ${nocolor}"
 yum module disable mysql -y  &>>/tmp/roboshop.log
+stat_check $?
 
-echo -e "\e[33m Copy MySQL Repo file \e[0m"
+echo -e "${color} Copy MySQL Repo file  ${nocolor}"
 cp /root/learn-shell/roboshop-shell/mysql.repo /etc/yum.repos.d/mysql.repo  &>>/tmp/roboshop.log
+stat_check $?
 
-echo -e "\e[33m Install MySQL Community Server \e[0m"
+echo -e "${color} Install MySQL Community Server  ${nocolor}"
 yum install mysql-community-server -y  &>>/tmp/roboshop.log
+stat_check $?
 
-echo -e "\e[33m Start MySQL Service \e[0m"
+echo -e "${color} Start MySQL Service  ${nocolor}"
 systemctl enable mysqld  &>>/tmp/roboshop.log
 systemctl restart mysqld  &>>/tmp/roboshop.log
+stat_check $?
 
-echo -e "\e[33m Setup MySQL Password \e[0m"
+echo -e "${color} Setup MySQL Password  ${nocolor}"
 mysql_secure_installation --set-root-pass $1 &>>/tmp/roboshop.log
