@@ -1,11 +1,11 @@
 source common.sh
 
-echo -e "${color}Disable MySQL Default version  ${nocolor}"
+echo -e "${color} Disable MySQL Default version  ${nocolor}"
 yum module disable mysql -y  &>>/tmp/roboshop.log
 stat_check $?
 
 echo -e "${color} Copy MySQL Repo file  ${nocolor}"
-cp /root/learn-shell/roboshop-shell/mysql.repo /etc/yum.repos.d/mysql.repo  &>>/tmp/roboshop.log
+cp /home/centos/learn-shell/roboshop-shell/mysql.repo /etc/yum.repos.d/mysql.repo  &>>/tmp/roboshop.log
 stat_check $?
 
 echo -e "${color} Install MySQL Community Server  ${nocolor}"
