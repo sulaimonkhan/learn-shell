@@ -43,7 +43,7 @@ stat_check() {
 
  systemd_setup() {
    echo -e "${color} Setup SystemD Service ${nocolor}"
-   cp /root/learn-shell/roboshop-shell/$component.service /etc/systemd/system/$component.service  &>>$log_file
+   cp /home/centos/learn-shell/roboshop-shell/$component.service /etc/systemd/system/$component.service  &>>$log_file
    sed -i -e "s/roboshop_app_password/$roboshop_app_password/" /etc/systemd/system/$component.service 
    stat_check $?
 
@@ -75,7 +75,7 @@ stat_check() {
 
  mongo_schema_setup() {
    echo -e "${color} Copy MongoDB Repo file ${nocolor}"
-   cp /root/learn-shell/roboshop-shell/mongodb.repo /etc/yum.repos.d/mongo.repo   &>>$log_file
+   cp /home/centos/learn-shell/roboshop-shell/mongodb.repo /etc/yum.repos.d/mongo.repo   &>>$log_file
    stat_check $?
 
   
@@ -112,7 +112,7 @@ stat_check() {
   mvn clean package &>>$log_file
   mv target/${component}-1.0.jar ${component}.jar &>>$log_file
   stat_check $?
-  
+
   mysql_schema_setup
   systemd_setup
 }
