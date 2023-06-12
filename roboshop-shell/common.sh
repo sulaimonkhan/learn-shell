@@ -35,8 +35,8 @@ stat_check() {
   curl -L -o /tmp/${component}.zip https://roboshop-artifacts.s3.amazonaws.com/${component}.zip &>>$log_file 
   stat_check $?
 
-  echo -e "${color} Extract Application Content${nocolor}"
-  cd $app_path
+  echo -e "${color}Extract Application Content ${nocolor}"
+  cd ${app_path}
   unzip /tmp/{$component}.zip  &>>$log_file
   stat_check $?
 } 
