@@ -22,7 +22,7 @@ go get  &>>/tmp/roboshop.log
 go build &>>/tmp/roboshop.log
 
 echo -e \e"[33m Setup SystemD Service \e[0m"
-cp /root/learn-shell/roboshop-shell/Dispatch.service /etc/systemd/system/dispatch.service  &>>/tmp/roboshop.log
+cp /home/centos/learn-shell/roboshop-shell/Dispatch.service /etc/systemd/system/dispatch.service  &>>/tmp/roboshop.log
 
 
 
