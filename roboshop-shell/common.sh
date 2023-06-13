@@ -51,7 +51,7 @@ stat_check() {
    systemctl daemon-reload   &>>$log_file
    systemctl enable $component  &>>$log_file
    systemctl restart $component  &>>$log_file
-   
+   stat_check $?
  }  
 
  nodejs() {
