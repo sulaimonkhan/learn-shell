@@ -37,7 +37,7 @@ stat_check() {
 
   echo -e "${color} Extract Application Content ${nocolor}"
   cd ${app_path}
-  unzip /tmp/$component.zip 
+  unzip /tmp/$component.zip &>>$log_file
   stat_check $?
 } 
 
