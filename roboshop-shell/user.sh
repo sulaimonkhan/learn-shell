@@ -1,5 +1,5 @@
-source common.sh
-component=user
+ source common.sh
+ component=user
 
-nodejs
-mongo_schema_setup
+ nodejs
+ mongo_schema_setup
