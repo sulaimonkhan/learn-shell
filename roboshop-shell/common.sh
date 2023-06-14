@@ -84,7 +84,7 @@ stat_check() {
   stat_check $?
 
   echo -e "${color} Load Schema ${nocolor}"
-  mongo --host mongodb-dev.devopsb72.site <${app_path}/schema/$component.js  &>>$log_file   
+  mongo --host mongodb-dev.devopsb72.site <{app/schema/$component.js  &>>$log_file   
   stat_check $?
 }
 
