@@ -6,29 +6,32 @@
       ansible.builtin.yum:
         name: nginx
         state: latest
+    
+    - name: Remove directory
+      ansible.builtin.file:
+         path: /usr/share/nginx/html
+         state: absent
 
-# echo -e "${color} Installing Nginx server ${nocolor}"
-#  yum install nginx -y &>>/tmp/roboshop.log 
-#  stat_check $?
 
-#  echo -e "${color} Removing old App content ${nocolor}" 
-#  rm -rf /usr/share/nginx/html/* &>>/tmp/roboshop.log 
-#  stat_check $?
-
-#  echo -e "${color} Downloading Fronted content ${nocolor}"
-#  curl -o /tmp/frontend.zip https://roboshop-artifacts.s3.amazonaws.com/frontend.zip  &>>/tmp/roboshop.log 
-#  stat_check $?
-
-#  echo -e "${color} Extract Fronted content ${nocolor}"
-#  cd /usr/share/nginx/html   
-#  unzip /tmp/frontend.zip &>>/tmp/roboshop.log
-#  stat_check $?
-
-#  echo -e "${color} Update Fronted Configuration ${nocolor}"
-#  cp /home/centos/learn-shell/roboshop-shell/roboshop.conf  /etc/nginx/default.d/roboshop.conf &>>/tmp/roboshop.log
-#  stat_check $?
-
-#  echo -e "${color} Starting Nginx server ${nocolor}"
-#  systemctl enable nginx &>>/tmp/roboshop.log  
-#  systemctl restart nginx &>>/tmp/roboshop.log 
-#  stat_check $?
+    - name: Create directory
+      ansible.builtin.file:
+         path: /usr/share/nginx/html
+         state: directory
+   
+    - name: Download and ectract frontend content
+      ansible.builtin.unarchive:
+         src: https://roboshop-artifacts.s3.amazonaws.com/frontend.zip
+         dest: /usr/share/nginx/html
+         remote_src: yes
+      
+    - name: Copy file with owner and permissions
+      ansible.builtin.copy:
+        src: roboshop.conf
+        dest: /etc/nginx/default.d/roboshop.conf
+    
+    - name: Start Nginx Service
+      ansible.builtin.systemd:
+         state: restarted
+         name: nginx
+         enabled: true
+         
