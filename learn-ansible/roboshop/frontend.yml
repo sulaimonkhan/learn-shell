@@ -4,8 +4,8 @@
     - name: Installing Nginx server
       ansible.builtin.yum:
         name: nginx
-       state: latest
-       
+        state: latest
+
 # echo -e "${color} Installing Nginx server ${nocolor}"
 #  yum install nginx -y &>>/tmp/roboshop.log 
 #  stat_check $?
