@@ -4,7 +4,7 @@
   tasks: 
     - name: Installing Nginx Server
       ansible.builtin.yum:
-      name: nginx
+      name: Nginx
       state: latest
     
     - name: Remove directory
