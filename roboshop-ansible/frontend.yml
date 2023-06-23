@@ -2,9 +2,9 @@
   hosts: all
   become: yes
   tasks: 
-    - name: Installing Nginx Server
+    - name: installing nginx server
       ansible.builtin.yum:
-      name: Nginx
+      name: nginx
       state: latest
     
     - name: Remove directory
