@@ -1,7 +1,0 @@
-- name: Configuring Nodejs
-  ansible.builtin.shell: curl -sL https://rpm.nodesource.com/setup_Its.x | bash
-
-- name: Install NodeJS
-  anmsible.builtin.yum:
-    name: nodejs.
-    state: installed  
