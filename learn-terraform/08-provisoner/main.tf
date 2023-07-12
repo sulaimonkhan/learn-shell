@@ -9,6 +9,14 @@ resource "aws_instance" "web" {
 }
 
 provisioner "remote-exec" {
+  
+   connection {
+    type     = "ssh"
+    user     = "centos"
+    password = DevOps321
+    host     = self.public_ip
+  }
+  
   inline = [
       "sudo labauto ansible"
       " ansible-pull -i localhost, -U http://github.com/https://github.com/sulaimonkhan/roboshop-ansible mai.yml -e env-dev -e role_name=frontend 
