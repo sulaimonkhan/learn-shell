@@ -15,19 +15,16 @@ resource "aws_instance" "web" {
      user     = "centos"
      password = "DevOps321"
      host     = self.public_ip
-  }
+    }
   
-  
-  inline = [
+
+    inline = [
       "sudo labauto ansible"
       "ansible-pull -i localhost, -U https://https://github.com/sulaimonkhan/roboshop-ansible main.yml -e env-dev -e role_name=frontend 
     ]
   }
 
-
 }
-
-
  
 data "aws_ami" "example" {
   owners           = ["973714476881"] 
