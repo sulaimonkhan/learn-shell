@@ -16,3 +16,11 @@ echo -e "\e[33msohail in Yellow color\e[0m"
 echo -e "\e[34msohail in Blue color\e[0m"
 echo -e "\e[35msohail in Magenta color\e[0m"
 echo -e "\e[36msohail in Cyan color\e[0m"
+
+
+echo -e "\e[31mHello in Red  color\e[0m"
+echo -e "\e[32mHello in Green color\e[0m"
+echo -e "\e[33mHello in Yellow color\e[0m"
+echo -e "\e[34mHello in Blue color\e[0m"
+echo -e "\e[35mHello in Magenta color\e[0m"
+echo -e "\e[36mHello in Cyan color\e[0m"
