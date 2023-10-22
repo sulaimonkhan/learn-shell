@@ -11,8 +11,8 @@ echo sohail
 # COL stands for color and possible colors are RED(31), GREEN(32), YELLOW(33), BlUE(34), MAGENTA(35), CYAN(36)
 
 echo -e "\e[31msohail in Red color\e[0m"
-echo -e "\e[31msohail in Green color\e[0m"
-echo -e "\e[31msohail in Yellow color\e[0m"
-echo -e "\e[31msohail in Blue color\e[0m"
-echo -e "\e[31msohail in Magenta color\e[0m"
-echo -e "\e[31msohail in Cyan color\e[0m"
+echo -e "\e[32msohail in Green color\e[0m"
+echo -e "\e[33msohail in Yellow color\e[0m"
+echo -e "\e[34msohail in Blue color\e[0m"
+echo -e "\e[35msohail in Magenta color\e[0m"
+echo -e "\e[36msohail in Cyan color\e[0m"
